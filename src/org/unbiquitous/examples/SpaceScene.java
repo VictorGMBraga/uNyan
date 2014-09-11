@@ -7,5 +7,6 @@ public class SpaceScene extends GameObjectTreeScene {
 		add(new Background(assets));
 		add(new Stars(assets, 30));
 		add(new NyanCat(assets));
+		add(new Music(assets));
 	}
 }
