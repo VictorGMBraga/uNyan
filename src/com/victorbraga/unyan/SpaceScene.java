@@ -1,4 +1,4 @@
-package org.unbiquitous.examples;
+package com.victorbraga.unyan;
 
 import org.unbiquitous.uImpala.engine.core.GameObjectTreeScene;
 

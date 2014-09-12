@@ -1,4 +1,4 @@
-package org.unbiquitous.examples;
+package com.victorbraga.unyan;
 
 import org.unbiquitous.uImpala.engine.core.Game;
 import org.unbiquitous.uImpala.engine.core.GameComponents;
@@ -17,7 +17,7 @@ public class Menu extends GameScene{
 		screen = GameComponents.get(ScreenManager.class).create();
 		speaker = (Speaker) GameComponents.get(SpeakerManager.class).alloc();
 		
-		screen.open("ITAE", 1280, 800, true, null);
+		screen.open("ITAE", 1920, 1080, true, null);
 		GameComponents.put(Screen.class, screen);
 		GameComponents.put(Speaker.class, speaker);
 		GameComponents.get(Game.class).change(new SpaceScene());

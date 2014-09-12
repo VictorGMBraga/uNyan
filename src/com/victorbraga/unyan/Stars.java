@@ -1,4 +1,4 @@
-package org.unbiquitous.examples;
+package com.victorbraga.unyan;
 
 import java.util.Random;
 
@@ -14,20 +14,18 @@ import org.unbiquitous.uImpala.util.Corner;
 public class Stars extends GameObject {
 
 	Screen screen;
-	float starCoordinatesX[], starCoordinatesY[];
+	float starCoordinatesX[], starCoordinatesY[], scale;
 	Random rand = new Random();
 	Animation starAnimation;
 	Sprite starSprite;
 	int numberOfStars, limiter;
-	float speedX, speedY;
 
 	public Stars(AssetManager assets, int numberOfStars) {
 		screen = GameComponents.get(Screen.class);
 		
-		speedX = 0;
-		speedY = 0;
-		
 		this.numberOfStars = numberOfStars;
+		
+		scale = 5.0f;
 		
 		starSprite = assets.newSprite("img/star_sprite.png");
 		starAnimation = assets.newAnimation(starSprite, 6, 10);
@@ -36,8 +34,8 @@ public class Stars extends GameObject {
 		starCoordinatesY = new float[numberOfStars];
 		
 		for(int i = 0; i < numberOfStars; i++){
-			starCoordinatesX[i] = (float)rand.nextInt(1280);
-			starCoordinatesY[i] = (float)rand.nextInt(800);
+			starCoordinatesX[i] = (float)rand.nextInt(screen.getWidth());
+			starCoordinatesY[i] = (float)rand.nextInt(screen.getHeight());
 		}
 	}
 	
@@ -52,7 +50,7 @@ public class Stars extends GameObject {
 		arg0.put(0, new Runnable(){
 			public void run() {
 				for(int i = 0; i < numberOfStars; i++){
-					starAnimation.render(screen, starCoordinatesX[i], starCoordinatesY[i], Corner.CENTER, 1.0f, 0.0f, 3.0f, 3.0f);
+					starAnimation.render(screen, starCoordinatesX[i], starCoordinatesY[i], Corner.CENTER, 1.0f, 0.0f, scale, scale);
 				}
 			}
 		});
@@ -73,8 +71,8 @@ public class Stars extends GameObject {
 			}
 			
 			for(int i = loopStart; i < loopEnd; i++){
-				starCoordinatesX[i] = (float)rand.nextInt(1280);
-				starCoordinatesY[i] = (float)rand.nextInt(800);
+				starCoordinatesX[i] = (float)rand.nextInt(screen.getWidth());
+				starCoordinatesY[i] = (float)rand.nextInt(screen.getHeight());
 			}
 			limiter = 0;
 		}

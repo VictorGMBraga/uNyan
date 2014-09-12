@@ -1,4 +1,4 @@
-package org.unbiquitous.examples;
+package com.victorbraga.unyan;
 
 import org.lwjgl.input.Keyboard;
 import org.unbiquitous.uImpala.engine.asset.Animation;
@@ -21,9 +21,10 @@ public class NyanCat extends GameObject{
 	Animation nyanAnimation, rainbowAnimation;
 	Sprite nyanSprite, rainbowSprite;
 	Screen screen;
-	int hp, counter;
+	int hp = 10, counter = 0;
 	KeyboardSource keyboard;
-	Boolean blinker;
+	Boolean blinker = false;
+	float nyanScale = 0.7f, rainbowScale = 0.3f;
 	
 	public NyanCat(AssetManager assets) {
 		screen = GameComponents.get(Screen.class);
@@ -31,9 +32,6 @@ public class NyanCat extends GameObject{
 		nyanAnimation = assets.newAnimation(nyanSprite, 6, 10);
 		rainbowSprite = assets.newSprite("img/rainbow.png");
 		rainbowAnimation = assets.newAnimation(rainbowSprite, 2, 5);
-		hp = 10;
-		counter = 0;
-		blinker = false;
 		keyboard = screen.getKeyboard();
         keyboard.connect(KeyboardSource.EVENT_KEY_DOWN, new Observation(this, "OnKeyDown"));
 	}
@@ -48,16 +46,16 @@ public class NyanCat extends GameObject{
 	protected void render(GameRenderers arg0) {
 		arg0.put(0, new Runnable(){
 			public void run() {
-				float x=screen.getMouse().getX(), y=screen.getMouse().getY(), escala = 0.2f;
-				while(x > -((rainbowSprite.getWidth()*escala)/2)){
-					rainbowAnimation.render(screen, x, y, Corner.CENTER, 1.0f, 0.0f, escala, escala);
-					x -= (rainbowSprite.getWidth()*escala)/2;
+				float x=screen.getMouse().getX(), y=screen.getMouse().getY() - 10;
+				while(x > -((rainbowSprite.getWidth()*rainbowScale)/2)){
+					rainbowAnimation.render(screen, x, y, Corner.CENTER, 1.0f, 0.0f, rainbowScale, rainbowScale);
+					x -= (rainbowSprite.getWidth()*rainbowScale)/2;
 				}
 				
 				if(hp > 4 || !blinker)
-					nyanAnimation.render(screen, screen.getMouse().getX(), screen.getMouse().getY(), Corner.CENTER, 1.0f, 0.0f);
+					nyanAnimation.render(screen, screen.getMouse().getX(), screen.getMouse().getY(), Corner.CENTER, 1.0f, 0.0f, nyanScale, nyanScale);
 				else
-					nyanAnimation.render(screen, screen.getMouse().getX(), screen.getMouse().getY(), Corner.CENTER, 1.0f, 0.0f, 1.0f, 1.0f, Color.red);
+					nyanAnimation.render(screen, screen.getMouse().getX(), screen.getMouse().getY(), Corner.CENTER, 1.0f, 0.0f, nyanScale, nyanScale, Color.red);
 			}
 		});
 	}
@@ -69,7 +67,6 @@ public class NyanCat extends GameObject{
 			blinker = !blinker;
 			counter = 0;
 		}
-		
 	}
 
 	@Override

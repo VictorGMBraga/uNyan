@@ -1,4 +1,4 @@
-package org.unbiquitous.examples;
+package com.victorbraga.unyan;
 
 import java.util.Arrays;
 
@@ -10,7 +10,7 @@ import org.unbiquitous.uImpala.engine.io.SpeakerManager;
 import org.unbiquitous.uImpala.jse.impl.core.Game;
 
 public class Main {
-	@SuppressWarnings("serial")
+	@SuppressWarnings({ "serial" })
 	public static void main(String[] args){
 		Game.run(new GameSettings() {{
 			put("first_scene", Menu.class);
