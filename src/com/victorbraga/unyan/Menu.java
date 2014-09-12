@@ -16,8 +16,8 @@ public class Menu extends GameScene{
 	public Menu() {
 		screen = GameComponents.get(ScreenManager.class).create();
 		speaker = (Speaker) GameComponents.get(SpeakerManager.class).alloc();
-		
-		screen.open("ITAE", 1920, 1080, true, null);
+				
+		screen.open("uNyan", 1152, 720, false, null);
 		GameComponents.put(Screen.class, screen);
 		GameComponents.put(Speaker.class, speaker);
 		GameComponents.get(Game.class).change(new SpaceScene());
